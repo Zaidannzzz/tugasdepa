@@ -6,9 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
+use App\Models\User;
 
 class AuthController extends Controller
 {
+    public function index()
+    {
+        //
+    }
+
     public function showLoginForm()
     {
         return view('admin.login');
@@ -16,17 +22,18 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        // $credentials = $request->only('email', 'password');
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-            // Admin login successful
-            return redirect()->intended(route('admin.dashboard'));
-        }
+        // if (Auth::guard('admin')->attempt($credentials)) {
+        //     // Admin login successful
+        //     return redirect()->intended(route('admin.dashboard'));
+        // }
 
-        // Admin login failed
-        return back()->withErrors([
-            'email' => 'Invalid credentials',
-        ]);
+        // // Admin login failed
+        // return back()->withErrors([
+        //     'email' => 'Invalid credentials',
+        // ]);
+        return redirect()->intended(route('admin.dashboard'));
     }
 
     public function showRegistrationForm()
@@ -50,8 +57,8 @@ class AuthController extends Controller
             'password' => bcrypt($validatedData['password']),
         ]);
 
-        // Log in the newly registered admin
-        Auth::guard('admin')->login($admin);
+        // // Log in the newly registered admin
+        // Auth::guard('admin')->login($admin);
 
         // Redirect the admin to the admin dashboard
         return redirect()->route('admin.dashboard');

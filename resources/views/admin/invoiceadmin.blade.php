@@ -129,30 +129,26 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Dashboard</h1>
           </div>
-          <h2>User</h2>
+          <h2>Bukti Pembayaran</h2>
           <div class="table-responsive">
-            <table class="table table-striped table-sm" id="table-user">
+            <table class="table table-striped table-sm">
               <thead>
                 <tr>
-                  <th>Nomor</th>
-                  <th>Nama</th>
-                  <th>Email</th>
+                  <th>No</th>
+                  <th>Nama Client</th>
+                  <th>Bank</th>
+                  <th>Gambar Bukti Pembayaran</th>
                 </tr>
               </thead>
-            @foreach($user as $u)
+              @foreach($bukti as $b)
               <tbody>
                 <tr>
-                  <td>{{ $u->id }}</td>
-                  <td>{{ $u->name }}</td>
-                  <td>{{ $u->email }}</td>
-                  <form method="POST" action="{{ route('admin.destroy', $u) }}">
-                        @csrf
-                        @method('delete')
-                        <td><input type="submit" value="Hapus" class="user-detail btn btn-danger mb-2"/></td>
-                    </form>
+                  <td>{{ $b->name }}</td>
+                  <td>{{ $b->bank }}</td>
+                  <td><img src="{{ asset('images/' . $b->image) }}" alt="Bukti Pembayaran"></td>
                 </tr>
               </tbody>
-            @endforeach
+              @endforeach
             </table>
           </div>
         </main>
